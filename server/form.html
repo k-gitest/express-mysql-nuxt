@@ -1,10 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
 	<title>入力フォーム</title>
 </head>
+<style>
+  #api_list ul{
+    margin:0;
+    padding:0;
+    display: flex;
+    list-style: none;
+  }
+  #api_list li{
+    padding:1rem;
+    border-bottom:solid 1px #ccc;
+  }
+</style>
 <body>
 <h1>入力フォーム</h1>
 <form action="/" method="POST">
@@ -13,9 +24,36 @@
     <button type="submit">送信</button>
 </form>
 
+<div id="api_list"></div>
+
 <script>
-  const url = 'https://k-paiza-5.paiza-user-free.cloud:8000/api'
-  console.log(url)
+  const url = 'https://hogebest-2.paiza-user-free.cloud:3000/api'
+  const list = document.querySelector('#api_list')
+
+  //console.log(url)
+  window.addEventListener('DOMContentLoaded',()=>{
+    fetch(url)
+    .then(res=>{
+      return res.json()
+    })
+    .then(data=>{
+      console.log(data)
+      apiParse(data)
+    })
+  })
+  
+  function apiParse(data){
+    data.filter(f=>{
+      console.log(f.id,f.name,f.email)
+      str = `<ul>
+      <li>${f.id}</li>
+      <li>${f.name}</li>
+      <li>${f.email}</li>
+      </ul>`
+      list.insertAdjacentHTML('afterbegin',str)
+    })
+  }
+  
   
 </script>
 

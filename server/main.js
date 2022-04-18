@@ -2,8 +2,9 @@ const express = require('express')
 // 送信されたdataを処理するためには、body-parserモジュールを使用する
 //const bodyParser = require('body-parser')
 const app = express()
-const port = 8000
+const port = 3000
 const mysql = require('mysql2')
+//const csp = require('express-csp-header')
 
 // db接続用
 const con = mysql.createConnection({
@@ -17,6 +18,8 @@ const con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log('DB Connected');
+	
+	
 	
   /* DBを作成する場合
   con.query('CREATE DATABASE mydb', function (err, result) {
@@ -100,7 +103,8 @@ app.get("/api", function(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header(
     'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, access_token'
+    'Content-Type, Authorization, access_token',
+    'Content-Type, application/json; charset=utf-8'
   );
 
   // データの返却
