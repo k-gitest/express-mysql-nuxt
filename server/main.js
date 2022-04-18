@@ -1,10 +1,11 @@
 const express = require('express')
 // 送信されたdataを処理するためには、body-parserモジュールを使用する
-const bodyParser = require('body-parser')
+//const bodyParser = require('body-parser')
 const app = express()
 const port = 8000
-const mysql = require('mysql')
+const mysql = require('mysql2')
 
+// db接続用
 const con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -12,9 +13,10 @@ const con = mysql.createConnection({
   database: 'mydb' //db作成後に追加
 })
 
+// db接続
 con.connect(function(err) {
   if (err) throw err;
-  console.log('Connected');
+  console.log('DB Connected');
 	
   /* DBを作成する場合
   con.query('CREATE DATABASE mydb', function (err, result) {
@@ -62,11 +64,30 @@ con.connect(function(err) {
 
 app.use('/', express.static('server'));
 // body-parserをミドルウェアとして設定
-app.use(bodyParser.urlencoded({extended: true}))
+//app.use(bodyParser.urlencoded({extended: true}))
+//express4.16以降はbody-parserがいらない
+app.use(express.urlencoded({extended: true}));
 
+app.route('/')
+  .get((req, res) => {
+  	res.sendFile(__dirname + '/form.html')
+  })
+  .post((req, res) => {
+    //res.send(req.body)
+    const sql = "INSERT INTO users SET ?"
+  	con.query(sql,req.body,function(err, result, fields){
+  		if (err) throw err;
+  		console.log(result);
+  		//res.send('登録が完了しました');
+      res.redirect('/') //送信後のページ遷移
+  	});
+  })
+
+/*
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/form.html')
 })
+*/
 
 // apiサーバ設定
 app.get("/api", function(req, res, next) {
@@ -88,6 +109,7 @@ app.get("/api", function(req, res, next) {
 });
 
 // 送信データをDBへ挿入
+/*
 app.post('/', (req, res) => {
   //res.send(req.body)
   const sql = "INSERT INTO users SET ?"
@@ -98,6 +120,7 @@ app.post('/', (req, res) => {
     res.redirect('/') //送信後のページ遷移
 	});
 })
+*/
 
 /*
 app.get('/', (request, response) => {
