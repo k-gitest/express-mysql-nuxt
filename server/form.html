@@ -27,7 +27,7 @@
 <div id="api_list"></div>
 
 <script>
-  const url = 'https://hogebest-2.paiza-user-free.cloud:3000/api'
+  const url = 'https://hogeliko12.paiza-user-free.cloud:3000/api'
   const list = document.querySelector('#api_list')
 
   //console.log(url)
@@ -49,6 +49,8 @@
       <li>${f.id}</li>
       <li>${f.name}</li>
       <li>${f.email}</li>
+      <li><a href="/edit/${f.id}">更新</a></li>
+      <li><a href="/delete/${f.id}">削除</a></li>
       </ul>`
       list.insertAdjacentHTML('afterbegin',str)
     })

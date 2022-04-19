@@ -18,8 +18,7 @@ const con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log('DB Connected');
-	
-	
+
 	
   /* DBを作成する場合
   con.query('CREATE DATABASE mydb', function (err, result) {
@@ -91,6 +90,16 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/form.html')
 })
 */
+
+//削除処理
+app.get('/delete/:id',(req,res)=>{
+	const sql = "DELETE FROM users WHERE id = ?";
+	con.query(sql,[req.params.id],function(err,result,fields){
+		if (err) throw err;
+		console.log(result)
+		res.redirect('/');
+	})
+});
 
 // apiサーバ設定
 app.get("/api", function(req, res, next) {
