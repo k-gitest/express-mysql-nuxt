@@ -18,7 +18,6 @@ const con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log('DB Connected');
-
 	
   /* DBを作成する場合
   con.query('CREATE DATABASE mydb', function (err, result) {
@@ -91,8 +90,28 @@ app.get('/', (req, res) => {
 })
 */
 
+//更新処理
+const ejs = require('ejs')
+app.set('view engine', 'ejs')
+app.get('/edit/:id',(req,res)=>{
+	const sql = "SELECT * FROM users WHERE id = ?";
+	con.query(sql,[req.params.id],function (err, result, fields) {  
+		if (err) throw err;
+		res.render('edit',{user : result})
+		});
+})
+
+app.post('/update/:id',(req,res)=>{
+	const sql = "UPDATE users SET ? WHERE id = " + req.params.id;
+	con.query(sql,req.body,function (err, result, fields) {  
+		if (err) throw err;
+		console.log(result);
+		res.redirect('/');
+		});
+})
+
 //削除処理
-app.get('/delete/:id',(req,res)=>{
+app.post('/delete/:id',(req,res)=>{
 	const sql = "DELETE FROM users WHERE id = ?";
 	con.query(sql,[req.params.id],function(err,result,fields){
 		if (err) throw err;
@@ -103,7 +122,6 @@ app.get('/delete/:id',(req,res)=>{
 
 // apiサーバ設定
 app.get("/api", function(req, res, next) {
-  
   const sql = "select * from users"
 	con.query(sql, function (err, result, fields) {  
 	if (err) throw err;
@@ -115,7 +133,7 @@ app.get("/api", function(req, res, next) {
     'Content-Type, Authorization, access_token',
     'Content-Type, application/json; charset=utf-8'
   );
-
+  
   // データの返却
   res.json(result);
 	});

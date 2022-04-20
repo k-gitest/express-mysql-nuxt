@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>入力フォーム</title>
+	<script type="module"></script>
 </head>
 <style>
   #api_list ul{
@@ -27,7 +28,7 @@
 <div id="api_list"></div>
 
 <script>
-  const url = 'https://hogeliko12.paiza-user-free.cloud:3000/api'
+  const url = 'https://buhibuhi.paiza-user-free.cloud:3000/api'
   const list = document.querySelector('#api_list')
 
   //console.log(url)
@@ -37,14 +38,14 @@
       return res.json()
     })
     .then(data=>{
-      console.log(data)
+      //console.log(data)
       apiParse(data)
     })
   })
   
   function apiParse(data){
     data.filter(f=>{
-      console.log(f.id,f.name,f.email)
+      //console.log(f.id,f.name,f.email)
       str = `<ul>
       <li>${f.id}</li>
       <li>${f.name}</li>
