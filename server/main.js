@@ -93,6 +93,7 @@ app.get('/', (req, res) => {
 //更新処理
 const ejs = require('ejs')
 app.set('view engine', 'ejs')
+app.set('views', './')
 app.get('/edit/:id',(req,res)=>{
 	const sql = "SELECT * FROM users WHERE id = ?";
 	con.query(sql,[req.params.id],function (err, result, fields) {  
