@@ -4,26 +4,33 @@ const app = express()
 const port = 3000
 
 // DB接続
-const sequelize = new Sequelize('mydb', 'root', null, {
-  host: 'localhost',
-  dialect: 'mysql',
-  // logging: false
-})
+const sequelize = new Sequelize(
+  'mydb', //DB名
+  'root', //ユーザー名
+  null, //パスワード
+  {
+    host: 'localhost', //ホスト名
+    dialect: 'mysql', //DB製品名
+    // logging: false
+  }
+)
 
 // モデル作成
-const User = sequelize.define('User',   // Userテーブル
+const User = sequelize.define('User', // Userテーブル
 {
   //カラム定義
   name: {
     type: DataTypes.STRING,  // 文字列型
-    allowNull: false         // Not Null
+    allowNull: false         // falseはNULLでエラー
+    //defaultValue：デフォルト値
+    //comment：コメント
   },
   age: {
     type: DataTypes.INTEGER  // 整数型
   },
   /*
   key: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER, //
     primaryKey: true,         // PRIMARY KEY
     autoIncrement: true,      // AUTO_INCREMENT
     comment: '主キー'          // COMMENT
