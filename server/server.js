@@ -125,7 +125,7 @@ const User = sequelize.define('User', // Userテーブル
   })
 
   // MySQLから切断
-  await sequelize.close()
+  //await sequelize.close()
 
 })()
 
@@ -137,13 +137,16 @@ app.route('/')
   	res.sendFile(__dirname + '/form.html')
   })
   .post(async(req, res) => {
+    //await sequelize.sync()
+    //await User.sync()
+    //createで単一レコード登録
+    //await User.create(req.body)
+    //bulkCreateは複数レコードを登録
     const user = await User.bulkCreate([
-    {name:'Honda',    age:18},
-    {name:'Yamaha',   age:16},
-    {name:'Suzuki',   age:20},
-    {name:'Kawasaki', age:24}
-  ])
-  	console.log(rows)
+      req.body
+    ])
+    
+  	console.log(req.body)
     res.redirect('/')
   })
 // webサーバー起動

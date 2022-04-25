@@ -73,6 +73,7 @@ app.route('/')
   .get((req, res) => {
   	res.sendFile(__dirname + '/form.html')
   })
+  //登録処理
   .post((req, res) => {
     //res.send(req.body)
     const sql = "INSERT INTO users SET ?"
