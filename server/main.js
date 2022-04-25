@@ -165,6 +165,7 @@ app.get('/', (request, response) => {
 	});
 });
 */
+// webサーバー接続
 // コンソールに接続を表示
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 

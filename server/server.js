@@ -16,6 +16,7 @@ const sequelize = new Sequelize(
 )
 
 // モデル作成
+// defineメソッドでモデル構造定義
 const User = sequelize.define('User', // Userテーブル
 {
   //カラム定義
@@ -28,6 +29,9 @@ const User = sequelize.define('User', // Userテーブル
   age: {
     type: DataTypes.INTEGER  // 整数型
   },
+  email: {
+    type: DataTypes.STRING,
+  }
   /*
   key: {
     type: DataTypes.INTEGER, //
@@ -79,7 +83,7 @@ const User = sequelize.define('User', // Userテーブル
 })
 
 //DB作成
-!(async()=>{
+!(async()=>{ //エラーの場合はtsconfig.jsonのcompilerOptionsのtargetをes6へ
   // MySQL上にテーブルを作成
   await User.sync({alter: true})
 
@@ -142,7 +146,8 @@ app.route('/')
   	console.log(rows)
     res.redirect('/')
   })
-
+// webサーバー起動
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 
 
