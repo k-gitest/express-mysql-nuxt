@@ -84,8 +84,20 @@ const User = sequelize.define('User', // Userテーブル
 
 //DB作成
 !(async()=>{ //エラーの場合はtsconfig.jsonのcompilerOptionsのtargetをes6へ
+  //トランザクション処理
+  // トランザクションを作成
+  const t = await sequelize.transaction()
+  
+  try{
+    await User.sync({alter: true})
+    await t.commit()
+  }
+  catch(err){
+    await t.rollback()
+  }
+  
   // MySQL上にテーブルを作成
-  await User.sync({alter: true})
+  //await User.sync({alter: true})
 
   // 既存のデータを削除(TRUNCATE)
   await User.destroy({
@@ -128,7 +140,7 @@ const User = sequelize.define('User', // Userテーブル
   //await sequelize.close()
 
 })()
-
+ 
 app.use('/', express.static('server'))
 app.use(express.urlencoded({extended: true}))
 
