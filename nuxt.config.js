@@ -85,4 +85,9 @@ export default {
     baseURL: 'http://localhost:8000/',
   },
   
+  //api用のサーバーミドルウェア設定
+  serverMiddleware: [
+    { path: '/api', handler: '~/server2/api' },
+  ]
+  
 }
