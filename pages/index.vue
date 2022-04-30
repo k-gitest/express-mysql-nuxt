@@ -14,6 +14,10 @@
           <v-btn @click="api" color="pink">
             api
           </v-btn>
+          <template v-if="hoge">
+            {{ hoge }}
+          </template v-if>
+          
         </v-card-actions>
         <v-card-actions>
           
@@ -48,6 +52,7 @@ export default {
   data() {
     return {
       text: null,
+      hoge: null,
     };
   },
   methods: {
@@ -62,6 +67,7 @@ export default {
       .catch(err=>{
         console.log(err)
       })
+      this.hoge = hoge
       console.log(hoge)
       alert(hoge)
     },

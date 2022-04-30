@@ -63,6 +63,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    loadingScreen: false,
   },
   
   //ユーザー認証のエンドポイント設定
@@ -83,6 +84,8 @@ export default {
   //リクエスト送信用のサーバーURL
   axios: {
     baseURL: 'http://localhost:8000/',
+    browserBaseURL: 'http://localhost-travel-3.paiza-user-free.cloud:3000/',
+    proxy: true,
   },
   
   //api用のサーバーミドルウェア設定
