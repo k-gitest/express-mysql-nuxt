@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // 必要があればここにテーブルの関連付けを書く
+      // メソッド自体は削除しない
     }
   }
   User.init({
