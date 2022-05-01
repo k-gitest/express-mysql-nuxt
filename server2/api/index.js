@@ -31,9 +31,11 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/', async (req, res) => {
+  //await console.log(res)
   //await console.log(req.body)
   //await console.log(req,res)
   const rows = await models.User.create(req.body)
+  res.send(true)
   //console.log(rows)
 })
 

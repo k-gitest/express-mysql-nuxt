@@ -11,11 +11,11 @@
         </v-card-title>
         <v-card-actions>
           <v-spacer />
-          <template v-if="hoge">
-            <ul v-for="hog in hoge">
-              <li>{{ hog.id }}</li>
-              <li>{{ hog.name }}</li>
-              <li>{{ hog.email }}</li>
+          <template v-if="users">
+            <ul v-for="user in users">
+              <li>{{ user.id }}</li>
+              <li>{{ user.name }}</li>
+              <li>{{ user.email }}</li>
             </ul v-for>
           </template v-if>
           
@@ -26,19 +26,15 @@
         <v-card-actions>
           
           <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
+          <v-btn color="primary" nuxt to="/inspire">
             Continue
           </v-btn>
         </v-card-actions>
       </v-card>
       
   <div class="hello">
-    <v-form action @submit.prevent>
-      <v-text-field type="text" placeholder="text" v-model="text" />
+    <v-form ref="form" @submit.prevent>
+      <v-text-field type="text" placeholder="name" v-model="name" />
       <v-text-field type="email" placeholder="email" v-model="email" />
       <v-col class="text-right">
       <v-btn color="warning" type="submit" value="" @click="submitClick">送信</v-btn>
@@ -56,14 +52,14 @@ import axios from "axios"
 export default {
   data() {
     return {
-      text: null,
+      name: null,
       email: null,
-      hoge: null,
+      users: null,
     };
   },
   methods: {
     api: async function(){
-      const hoge = await axios.get('https://localhost-travel-4.paiza-user-free.cloud:3000/api')
+      const hoge = await axios.get('/api')
       .then(res=>{
         return res.data
       })
@@ -73,36 +69,41 @@ export default {
       .catch(err=>{
         console.log(err)
       })
-      this.hoge = hoge
-      console.log(hoge)
+      this.users = hoge
+      //console.log(hoge)
       //alert(hoge)
     },
     
     submitClick: async function () {
-      
-      
-      try {
-        const url = '/api'
+      const url = '/api'
       const params = {
-        name: this.text,
+        name: this.name,
         email: this.email,
       }
-        await axios.post(url, params)
-        console.log("hoge")
+      
+      const res = await axios.post(url, params)
+      .then(res=>{
+        console.log(res)
         this.$refs.form.reset()
         this.text = null
         this.email = null
-        Object.assign(this.$data, this.$options.data.call(this))
-      }
-      catch(err){
+      })
+      .catch(err=>{
         console.log(err)
-      }
+      })
+      //console.log(res)
+      /*
+      this.$refs.form.reset()
+      this.text = null
+      this.email = null
+      Object.assign(this.$data, this.$options.data.call(this))
+      */
       //await axios.post(url, params);
       // alert(this.text);
     },
   },
   
-  name: 'IndexPage',
+  //name: 'IndexPage',
   
 }
 </script>
