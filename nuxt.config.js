@@ -83,8 +83,8 @@ export default {
   
   //リクエスト送信用のサーバーURL
   axios: {
-    baseURL: 'http://localhost:8000/',
-    browserBaseURL: 'http://localhost-travel-3.paiza-user-free.cloud:3000/',
+    baseURL: 'http://localhost:3000/',
+    browserBaseURL: 'http://localhost-travel-4.paiza-user-free.cloud:3000/',
     proxy: true,
   },
   
