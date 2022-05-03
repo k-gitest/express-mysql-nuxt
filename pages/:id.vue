@@ -23,6 +23,13 @@
 
 <script>
 import axios from "axios"
+/*
+//axios共通設定
+const myApi = axios.create({
+  baseURL: "http://localhost:5000/meibo",
+  responseType: "json"
+})
+*/
 
 export default {
   data() {
@@ -32,6 +39,21 @@ export default {
       users: null,
     };
   },
+  
+  async asyncData(){
+    const url = '/api'
+    const params = {id:this.$route.params}
+    await axios.get(url, params)
+    .then(res => {
+      console.log(res.data)
+      this.users = res.data
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  
+  
   methods: {
     //一覧表示
     index: async function(){
@@ -101,6 +123,22 @@ export default {
         console.log(err)
       })
     },
+    
+    /*
+    async created() {
+      show:async function(){
+        const url = '/api'
+        const params = {id:id}
+        await axios.get(url, params)
+        .then(res => {
+          this.users = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    },
+    */
     
   },
   

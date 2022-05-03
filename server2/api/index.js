@@ -41,6 +41,16 @@ app.post('/', async (req, res) => {
   //console.log(rows)
 })
 
+//閲覧
+app.get('/:id', async (req, res) => {
+  models.User.findAll({
+    where:{
+      id: req.body.id
+    }
+  })
+  res.send(true)
+})
+
 //編集
 app.put('/', async (req, res) => {
   models.User.update(req.body, {
