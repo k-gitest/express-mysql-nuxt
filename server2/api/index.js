@@ -24,12 +24,14 @@ const sequelize = new Sequelize(
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+//一覧表示
 app.get('/', async (req, res) => {
   //console.log('hoge')
   const rows = await models.User.findAll()
   res.json(rows)
 })
 
+//新規登録
 app.post('/', async (req, res) => {
   //await console.log(res)
   //await console.log(req.body)
@@ -38,5 +40,26 @@ app.post('/', async (req, res) => {
   res.send(true)
   //console.log(rows)
 })
+
+//編集
+app.put('/', async (req, res) => {
+  models.User.update(req.body, {
+    where:{id: req.body.id},
+  })
+  console.log(true)
+})
+
+//削除
+app.delete('/', async (req, res) => {
+  //console.log(req.body.id)
+  await models.User.destroy({
+    where: {id: req.body.id},
+  })
+  res.send(true)
+})
+
+
+
+
 
 export default app

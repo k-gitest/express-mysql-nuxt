@@ -11,6 +11,7 @@
         </v-card-title>
         <v-card-actions>
           <v-spacer />
+          <!--
           <template v-if="users">
             <ul v-for="user in users">
               <li>{{ user.id }}</li>
@@ -18,13 +19,38 @@
               <li>{{ user.email }}</li>
             </ul v-for>
           </template v-if>
+          -->
           
           <v-btn @click="api" color="pink">
             api
           </v-btn>
-        </v-card-actions>
-        <v-card-actions>
           
+          <template v-if="users">
+          <table style="width:100%;">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="user in users">
+              <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td><v-btn color="pink">編集</v-btn></td>
+                <td><v-btn @click="destroy(user.id)" color="pink">削除</v-btn></td>
+              </tr>
+              </template>
+            </tbody>
+          </table>
+          </template>
+
+        </v-card-actions>
+        
+        <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/inspire">
             Continue
@@ -32,15 +58,15 @@
         </v-card-actions>
       </v-card>
       
-  <div class="hello">
-    <v-form ref="form" @submit.prevent>
-      <v-text-field type="text" placeholder="name" v-model="name" />
-      <v-text-field type="email" placeholder="email" v-model="email" />
-      <v-col class="text-right">
-      <v-btn color="warning" type="submit" value="" @click="submitClick">送信</v-btn>
-      </v-col>
-    </v-form>
-  </div>
+      <div class="hello">
+        <v-form ref="form" @submit.prevent>
+          <v-text-field type="text" placeholder="name" v-model="name" />
+          <v-text-field type="email" placeholder="email" v-model="email" />
+          <v-col class="text-right">
+          <v-btn color="warning" type="submit" value="" @click="submitClick">送信</v-btn>
+          </v-col>
+        </v-form>
+      </div>
       
     </v-col>
   </v-row>
@@ -58,22 +84,21 @@ export default {
     };
   },
   methods: {
+    //一覧表示
     api: async function(){
       const hoge = await axios.get('/api')
       .then(res=>{
         return res.data
       })
       .then(data=>{
-        return data
+        this.users = data
       })
       .catch(err=>{
         console.log(err)
       })
-      this.users = hoge
-      //console.log(hoge)
-      //alert(hoge)
     },
     
+    //新規登録
     submitClick: async function () {
       const url = '/api'
       const params = {
@@ -81,29 +106,41 @@ export default {
         email: this.email,
       }
       
-      const res = await axios.post(url, params)
+      await axios.post(url, params)
       .then(res=>{
-        console.log(res)
         this.$refs.form.reset()
         this.text = null
         this.email = null
+        this.api()
+        //dataの初期設定に戻す
+        //Object.assign(this.$data, this.$options.data.call(this))
       })
       .catch(err=>{
         console.log(err)
       })
-      //console.log(res)
-      /*
-      this.$refs.form.reset()
-      this.text = null
-      this.email = null
-      Object.assign(this.$data, this.$options.data.call(this))
-      */
-      //await axios.post(url, params);
-      // alert(this.text);
     },
+    
+    //編集
+    edit: async function(id){
+      
+    },
+    
+    //削除
+    destroy: async function(id){
+      const url = '/api'
+      const params = {
+        id: id
+      }
+      await axios.delete(url,{data:params})
+      .then(res => {
+        this.api()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    
   },
-  
-  //name: 'IndexPage',
   
 }
 </script>
