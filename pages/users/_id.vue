@@ -40,13 +40,19 @@ export default {
     };
   },
   
-  async asyncData(){
-    const url = '/api'
-    const params = {id:this.$route.params}
-    await axios.get(url, params)
-    .then(res => {
-      console.log(res.data)
-      this.users = res.data
+  async asyncData({params, route}){
+    console.log(route.path, route.name, params.id)
+    const url = '/api/users/1'
+    //const params = {id:1}
+    await axios.get(url)
+    .then(res=>{
+      return res.data
+    })
+    .then(data => {
+      console.log(data)
+      //this.users = res.data
+      //console.log(users)
+      //this.name = "hoge1"
     })
     .catch(err => {
       console.log(err)

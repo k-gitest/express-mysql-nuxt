@@ -4,23 +4,6 @@ const app = express()
 
 const models = require('../models/')
 
-// DB接続
-/*
-const sequelize = new Sequelize(
-  'mydb', //DB名
-  'root', //ユーザー名
-  null, //パスワード
-  {
-    host: 'localhost', //ホスト名
-    dialect: 'mysql', //DB製品名
-    // logging: false
-  }
-)
-*/
-
-// ルートパスにアクセスがあった時、'Hello World!'という文字列を返す
-//app.get('/', (req, res) => res.send('Hello World!'))
-
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
@@ -42,13 +25,17 @@ app.post('/', async (req, res) => {
 })
 
 //閲覧
-app.get('/:id', async (req, res) => {
-  models.User.findAll({
+app.get('/users/:id', async (req, res) => {
+  console.log(req.params.id)
+  const id = parseInt(req.params.id)
+  const rows = await models.User.findAll({
     where:{
-      id: req.body.id
+      id: id
     }
   })
-  res.send(true)
+  
+  //res.sendStatus(500)
+  res.json(rows)
 })
 
 //編集
