@@ -26,14 +26,14 @@ app.post('/', async (req, res) => {
 
 //閲覧
 app.get('/users/:id', async (req, res) => {
-  console.log(req.params.id)
+  console.log("server:"+req.params.id)
   const id = parseInt(req.params.id)
   const rows = await models.User.findAll({
     where:{
       id: id
     }
   })
-  res.json(rows)
+  res.json(rows[0])
 })
 
 //編集

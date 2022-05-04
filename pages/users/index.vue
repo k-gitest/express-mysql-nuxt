@@ -45,9 +45,7 @@ export default {
     const id = parseInt(params.id)
     console.log(typeof id)
     
-    const url = `/api/users/${params.id}`
-    //const params = {id:1}
-    console.log(url)
+    const url = '/api/users/' + id
     return await axios.get(url)
     .then(res=>{
       //console.log(res.data)
