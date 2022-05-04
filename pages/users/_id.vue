@@ -40,25 +40,27 @@ export default {
     };
   },
   
-  async asyncData({params, route}){
-    console.log(route.path, route.name, params.id)
-    const url = '/api/users/1'
+  async asyncData({params}){
+    //console.log(params.id)
+    const url = '/api/users/'+params.id
     //const params = {id:1}
-    await axios.get(url)
+    return await axios.get(url)
     .then(res=>{
-      return res.data
-    })
-    .then(data => {
-      console.log(data)
-      //this.users = res.data
-      //console.log(users)
-      //this.name = "hoge1"
+      console.log(res.data)
+      return {users:res.data}
     })
     .catch(err => {
       console.log(err)
     })
   },
   
+  created(){
+    //console.log($ref.form)
+  },
+  mounted(){
+    this.users = users
+    console.log(this.users)
+  },
   
   methods: {
     //一覧表示

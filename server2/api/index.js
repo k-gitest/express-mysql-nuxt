@@ -33,8 +33,6 @@ app.get('/users/:id', async (req, res) => {
       id: id
     }
   })
-  
-  //res.sendStatus(500)
   res.json(rows)
 })
 

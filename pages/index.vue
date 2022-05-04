@@ -41,6 +41,10 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td><v-btn color="pink">編集</v-btn></td>
+                <td><nuxt-link :to="{ name: 'users-id', params: { id: user.id }}">
+            {{ user.name }}
+          </nuxt-link>
+          </td>
                 <td><v-btn @click="destroy(user.id)" color="pink">削除</v-btn></td>
               </tr>
               </template>
