@@ -44,7 +44,8 @@ export default {
   async asyncData({params}){
     const id = parseInt(params.id)
     console.log("vue:"+typeof id)
-    const url = `/api/users/${params.id}`
+    
+    const url = `/api/${params.id}/`
     //const params = {id:1}
     console.log(url)
     return await axios.get(url)
