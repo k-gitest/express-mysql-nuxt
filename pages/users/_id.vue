@@ -43,7 +43,7 @@ export default {
   //watchQuery: ['users'],
   async asyncData({params}){
     const id = parseInt(params.id)
-    console.log(typeof id)
+    console.log("vue:"+typeof id)
     
     const url = `/api/users/${params.id}`
     //const params = {id:1}
