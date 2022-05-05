@@ -24,7 +24,7 @@ app.post('/', async (req, res) => {
   //console.log(rows)
 })
 
-//閲覧
+//編集データ呼び出し・閲覧
 app.get('/users/:id', async (req, res) => {
   console.log("server:"+req.params.id)
   const id = parseInt(req.params.id)
@@ -36,19 +36,8 @@ app.get('/users/:id', async (req, res) => {
   res.json(rows[0])
 })
 
-app.get('/:id', async (req, res) => {
-  console.log("server:"+req.params.id)
-  const id = parseInt(req.params.id)
-  const rows = await models.User.findAll({
-    where:{
-      id: id
-    }
-  })
-  res.json(rows[0])
-})
-
-//編集
-app.put('/', async (req, res) => {
+//更新
+app.put('/users/:id', async (req, res) => {
   models.User.update(req.body, {
     where:{id: req.body.id},
   })

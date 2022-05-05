@@ -12,7 +12,7 @@
           <v-text-field type="text" placeholder="name" v-model="name" />
           <v-text-field type="email" placeholder="email" v-model="email" />
           <v-col class="text-right">
-          <v-btn color="warning" type="submit" value="" @click="create">送信</v-btn>
+          <v-btn color="warning" type="submit" value="" @click="edit">送信</v-btn>
           </v-col>
         </v-form>
       </div>
@@ -83,35 +83,10 @@ export default {
     this.email = await this.users.email
 */
   },
-  
+  //asyncDataやcreatedだとリロードやURL直打ちでapiを呼び出せない
   async mounted(){
-    //console.log(this.users.id)
-    //this.name = this.users.name
-    //this.email = this.users.email
-    //console.log(this.name)
-    //console.log(this.$refs.form.name)
-    //console.log(users.name)
-    //console.log(this.users)
-    
-    if(this.$route.params.id){
-      const id = parseInt(this.$route.params.id)
-      const url = `/api/users/${id}`
-      console.log(url)
-      await axios.get(url)
-      .then(res=>{
-        //console.log(res.data)
-        //console.log(res.data.id, res.data.name, res.data.email)
-        //return users = res.data
-        this.users = res.data
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    }
-    
-    await console.log("created:"+this.users.id)
-    this.name = await this.users.name
-    this.email = await this.users.email
+    //編集データ呼び出し
+    await this.findId()
   },
   
   methods: {
@@ -153,13 +128,40 @@ export default {
       })
     },
     
-    //編集
-    edit: async function(id){
-      const url = '/api'
-      const params = ''
+    //編集データ呼び出し
+    findId: async function(){
+      if(this.$route.params.id){
+        const id = parseInt(this.$route.params.id)
+        const url = `/api/users/${id}`
+        //console.log(url)
+        await axios.get(url)
+        .then(res=>{
+          //console.log(res.data)
+          //console.log(res.data.id, res.data.name, res.data.email)
+          //return users = res.data
+          this.users = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+      
+      //await console.log("created:"+this.users.id)
+      this.name = await this.users.name
+      this.email = await this.users.email
+    },
+    
+    //更新
+    edit: async function(){
+      const url = '/api/users/:id'
+      const params = {
+        id: this.users.id,
+        name: this.name,
+        email: this.email
+      }
       await axios.put(url, params)
       .then(res => {
-        
+        this.findId()
       })
       .catch(err => {
         console.log(err)
@@ -183,22 +185,7 @@ export default {
         console.log(err)
       })
     },
-    
-    /*
-    async created() {
-      show:async function(){
-        const url = '/api'
-        const params = {id:id}
-        await axios.get(url, params)
-        .then(res => {
-          this.users = res.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      }
-    },
-    */
+
     
   },
   
