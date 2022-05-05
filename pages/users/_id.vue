@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import axios from "axios"
 /*
 //axios共通設定
@@ -41,11 +40,11 @@ export default {
     };
   },
   //watchQuery: ['users'],
+  /*
   async asyncData({params}){
     const id = parseInt(params.id)
     console.log("vue:"+typeof id)
     const url = `/api/users/${params.id}`
-    //const params = {id:1}
     console.log(url)
     return await axios.get(url)
     .then(res=>{
@@ -58,14 +57,34 @@ export default {
       console.log(err)
     })
   },
+  */
   
-  created(){
-    //console.log("created:"+this.users.id)
-    this.name = this.users.name
-    this.email = this.users.email
+  async created(){
+    /*
+    //console.log(this.$route.params.id)
+    if(this.$route.params.id){
+      const id = parseInt(this.$route.params.id)
+      const url = `/api/users/${id}`
+      console.log(url)
+      await axios.get(url)
+      .then(res=>{
+        //console.log(res.data)
+        //console.log(res.data.id, res.data.name, res.data.email)
+        //return users = res.data
+        this.users = res.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+    
+    await console.log("created:"+this.users.id)
+    this.name = await this.users.name
+    this.email = await this.users.email
+*/
   },
   
-  mounted(){
+  async mounted(){
     //console.log(this.users.id)
     //this.name = this.users.name
     //this.email = this.users.email
@@ -73,6 +92,26 @@ export default {
     //console.log(this.$refs.form.name)
     //console.log(users.name)
     //console.log(this.users)
+    
+    if(this.$route.params.id){
+      const id = parseInt(this.$route.params.id)
+      const url = `/api/users/${id}`
+      console.log(url)
+      await axios.get(url)
+      .then(res=>{
+        //console.log(res.data)
+        //console.log(res.data.id, res.data.name, res.data.email)
+        //return users = res.data
+        this.users = res.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+    
+    await console.log("created:"+this.users.id)
+    this.name = await this.users.name
+    this.email = await this.users.email
   },
   
   methods: {
