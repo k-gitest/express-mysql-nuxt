@@ -74,6 +74,8 @@
         </v-form>
       </div>
       
+      <User />
+      
     </v-col>
   </v-row>
 </template>

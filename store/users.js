@@ -59,19 +59,13 @@ export const state = () => ({
       // 外部データを読み込む場合、stateに空の配列、mutationsにデータ受け取りの引数を設定する。
 
       getUsers:async function({commit}){
-  
-          // @nuxtjs/axiosを使用する場合
-          const posts = await this.$axios.$get('https://jsonplaceholder.typicode.com/users')
-              //console.log(posts)
-              commit('setUsers', posts)
-  
-          /*
-          // 通常のaxiosを使用する場合
-          return axios.get('https://jsonplaceholder.typicode.com/users')
-          .then(response  => {
-              commit('setUsers', response.data)
-          })
-          */
+        console.log('hoge','hoge')
+
+        return await axios.get('https://jsonplaceholder.typicode.com/users')
+        .then(res => {
+            commit('setUsers', res.data)
+        })
+
       },
       textTest: function({commit}){
           commit('mouse')
