@@ -62,7 +62,7 @@ export const state = () => ({
 
       getUsers: async function({commit}){
         console.log('hoge','hoge')
-        const url = 'http://localhost:3000/api'
+        const url = prefix+'api'
         
         //return await axios.get('https://jsonplaceholder.typicode.com/users')
         return await axios.get(url)
