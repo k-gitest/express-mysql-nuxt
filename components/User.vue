@@ -62,7 +62,6 @@ export default{
   //components配下ではthis.$store.dispatchを使用する
   async fetch(){
     console.log('boke')
-    console.log(prefix)
     await this.$store.dispatch('users/getUsers')
   },
   

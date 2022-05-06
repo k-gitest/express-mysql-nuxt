@@ -62,8 +62,9 @@ export const state = () => ({
 
       getUsers: async function({commit}){
         console.log('hoge','hoge')
-        const url = prefix+'api'
-        
+        const url = process.env.API_URL + '/api'
+        console.log(process.env.API_URL, process.env.BASE_URL)
+
         //return await axios.get('https://jsonplaceholder.typicode.com/users')
         return await axios.get(url)
         .then(res => {

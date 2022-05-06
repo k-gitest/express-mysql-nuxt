@@ -84,6 +84,7 @@ export default {
 */
   },
   //asyncDataやcreatedだとリロードやURL直打ちでapiを呼び出せない
+  //回避策としてmountedでapi呼び出す
   async mounted(){
     //編集データ呼び出し
     await this.findId()
@@ -129,6 +130,7 @@ export default {
     },
     
     //編集データ呼び出し
+    //更新後に戻る為にmethodsにする
     findId: async function(){
       if(this.$route.params.id){
         const id = parseInt(this.$route.params.id)
