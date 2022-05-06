@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <!--
+          
           <template v-for="user in users">
           <tr>
             <td>{{ user.id }}</td>
@@ -28,7 +28,7 @@
             <td><v-btn @click="destroy(user.id)" color="pink">削除</v-btn></td>
           </tr>
           </template>
-          -->
+          
         </tbody>
       </table>
     </template>
@@ -42,7 +42,9 @@
         </v-col>
       </v-form>
     </div>
-    {{ t_users }}
+    <!--
+    {{ users }}
+    -->
   </v-card>
 
 </template>
@@ -54,27 +56,35 @@ export default{
     return {
       name: null,
       email: null,
-      users: null,
+      //users: null,
     }
   },
   
   //store.dispatchなどはpages配下でしか使用できない
   //components配下ではthis.$store.dispatchを使用する
+  
   async fetch(){
-    console.log('boke')
+    //console.log('boke')
     await this.$store.dispatch('users/getUsers')
   },
   
+  
   computed:{
-    t_users: function(){
-      return this.$store.state.users.t_users
+    users: function(){
+      return this.$store.state.users.users
     }
   },
   
   methods:{
-    index(){
-      
+    index: async function(){
+      console.log('hoge')
+      await this.$store.dispatch('users/getUsers')
     },
+    /*
+    async index(){
+      await this.$store.dispatch('users/getUsers')
+    },
+    */
     
     create(){
       

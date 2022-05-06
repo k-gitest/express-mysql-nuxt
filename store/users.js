@@ -1,83 +1,37 @@
 import axios from 'axios'
 
 export const state = () => ({
-      message: 'Hello Vuex',
-      users: [
-              {name: 'John', email:'john@example.com', age:22},
-            {name: 'Merry', email: 'merry@facebook.com',age:33},
-            {name: 'Ken', email: 'ken@amazon.com',age:29}
-          ],
-      count: 0,
-      t_users: [],
-  })
+  users: [],
+})
   
-  export const getters = {
-    users: function(state){
-        // filter関数で配列から取り出す
-        return state.users.filter(user => user.age < 30 )
-    },
-    double: function(state){
-        return state.count**2
-    }
-  }
-  
-  export const mutations = {
-      increment: function(state, num){
-          //カウント更新処理 payload用の引数も用意できる
-          state.count = state.count + num
-      },
-  
-      increment_act: function(state){
-          state.count++
-      },
-  
-      setUsers: function(state, posts){
-          state.t_users = posts
-      },
-  
-      mouse: function(state){
-          state.sample = state.sample + state.mes
-      }
-  
-  }
-  
-  export const actions = {
-      incrementOne: function(context){
-          //contextのcommitを使用してmutationsを起動する
-          context.commit('increment_act')
-  
-          //非同期テスト 3秒後にカウントが増える
-          setTimeout(() => {
-              context.commit('increment_act')
-          }, 3000)
-      },
-      /*contextの中でcommitしか使わないのであればES6のDestructuringで短縮もできる
-      incrementOne: function({commit}){
-          commit('increment_act')
-      }
-      */
+export const getters = {
+  users: function(state){
+    // filter関数で配列から取り出す
+    return state.users.filter(user => user.age < 30 )
+  },
+}
 
-      // axiosを使用する場合
-      // 外部データを読み込む場合、stateに空の配列、mutationsにデータ受け取りの引数を設定する。
+export const mutations = {
+  setUsers: function(state, posts){
+    state.users = posts
+  },
+}
 
-      getUsers: async function({commit}){
-        console.log('hoge','hoge')
-        const url = process.env.API_URL + '/api'
-        console.log(process.env.API_URL, process.env.BASE_URL)
-
-        //return await axios.get('https://jsonplaceholder.typicode.com/users')
-        return await axios.get(url)
-        .then(res => {
-            commit('setUsers', res.data)
-        })
-        .catch(err =>{
-          console.log(err)
-        })
-
-      },
-      textTest: function({commit}){
-          commit('mouse')
-      }
-  }
+export const actions = {
+  getUsers: async function({commit}){
+    console.log('hogehoge')
+    //const url = process.env.API_URL + '/api'
+    const url = '/api'
+    //console.log(process.env.API_URL, process.env.BASE_URL)
+    //return await axios.get('https://jsonplaceholder.typicode.com/users')
+    return await axios.get(url)
+    .then(res => {
+        commit('setUsers', res.data)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  },
+}
   
   

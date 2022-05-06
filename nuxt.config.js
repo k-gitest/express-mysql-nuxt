@@ -87,9 +87,9 @@ export default {
     //Originとはプロトコル、ホスト、ポート番号のセット 例）httpがプロトコル、localhostがホスト、3000がポート
     //オリジンが1つでも異なれば別オリジン
     //axiosはCORSの対象となるのでプロキシを利用する
-    proxy: false,
+    proxy: true,
     // proxyを使用する場合baseURLは併用できないためコメントアウト
-    // baseURL: process.env.API_BASE_URL,
+    baseURL: process.env.API_BASE_URL,
     //baseURL: 'http://localhost:3000/',
     //browserBaseURL: 'http://localhost-travel-1.paiza-user-free.cloud:3000/',
     // baseURLとproxyを同時に使用することはできないためprefixを設定し、baseURLとして使用する
