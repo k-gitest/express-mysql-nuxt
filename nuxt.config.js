@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    //'plugins/axios',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -83,6 +84,7 @@ export default {
   
   //リクエスト送信用のサーバーURL
   axios: {
+    //prefix: 'http://localhost:3000/',
     baseURL: 'http://localhost:3000/',
     browserBaseURL: 'http://localhost-travel-4.paiza-user-free.cloud:3000/',
     proxy: true,

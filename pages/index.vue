@@ -91,6 +91,23 @@ export default {
       users: null,
     };
   },
+  
+  /*
+  //store.dispatchなどはpages配下で使用できる
+  //componentes配下では使用できない
+  async fetch({store}){
+    console.log('indexhoge')
+    await store.dispatch('users/getUsers')
+  },
+  */
+  /*
+  //this.$store.dispatchなどはpagesでもcomponentsでも使用できる
+  async fetch(){
+    console.log('bokeboke')
+    await this.$store.dispatch('users/getUsers')
+  },
+  */
+  
   methods: {
     //一覧表示
     index: async function(){

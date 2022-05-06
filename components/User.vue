@@ -42,11 +42,13 @@
         </v-col>
       </v-form>
     </div>
-    
+    {{ t_users }}
   </v-card>
 
 </template>
 <script>
+//import axios from 'axios'
+
 export default{
   data(){
     return {
@@ -56,13 +58,17 @@ export default{
     }
   },
   
-  async fetch({store}){
+  //store.dispatchなどはpages配下でしか使用できない
+  //components配下ではthis.$store.dispatchを使用する
+  async fetch(){
     console.log('boke')
-    await ('users/getUsers')
+    await this.$store.dispatch('users/getUsers')
   },
-
+  
   computed:{
-    
+    t_users: function(){
+      return this.$store.state.users.t_users
+    }
   },
   
   methods:{

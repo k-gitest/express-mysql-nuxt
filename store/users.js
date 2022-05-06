@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const state = () => ({
       message: 'Hello Vuex',
       users: [
@@ -58,12 +60,17 @@ export const state = () => ({
       // axiosを使用する場合
       // 外部データを読み込む場合、stateに空の配列、mutationsにデータ受け取りの引数を設定する。
 
-      getUsers:async function({commit}){
+      getUsers: async function({commit}){
         console.log('hoge','hoge')
-
-        return await axios.get('https://jsonplaceholder.typicode.com/users')
+        const url = 'http://localhost:3000/api'
+        
+        //return await axios.get('https://jsonplaceholder.typicode.com/users')
+        return await axios.get(url)
         .then(res => {
             commit('setUsers', res.data)
+        })
+        .catch(err =>{
+          console.log(err)
         })
 
       },
