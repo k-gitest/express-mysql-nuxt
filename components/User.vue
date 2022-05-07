@@ -49,7 +49,7 @@
 
 </template>
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 
 export default{
   data(){
@@ -62,12 +62,13 @@ export default{
   
   //store.dispatchなどはpages配下でしか使用できない
   //components配下ではthis.$store.dispatchを使用する
-  
+  /*
   async fetch(){
     //console.log('boke')
-    await this.$store.dispatch('users/getUsers')
+    //await this.$store.dispatch('users/getUsers')
+    await this.index()
   },
-  
+  */
   
   computed:{
     users: function(){
@@ -86,9 +87,47 @@ export default{
     },
     */
     
-    create(){
+    //新規登録
+    create: async function () {
+      const url = '/api'
+      const params = {
+        name: this.name,
+        email: this.email,
+      }
       
-    }
+      await axios.post(url, params)
+      .then(res=>{
+        //フォーム初期化
+        this.$refs.form.reset()
+        this.text = null
+        this.email = null
+        //dataの初期設定に戻す
+        //Object.assign(this.$data, this.$options.data.call(this))
+        //一覧更新
+        this.index()
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },
+    
+    //削除
+    destroy: async function(id){
+      const url = '/api'
+      const params = {
+        id: id
+      }
+      //axiosでdeleteを送る場合は第2引数でオブジェクト渡し
+      await axios.delete(url,{data:params})
+      .then(res => {
+        //一覧更新
+        this.index()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    
   },
 }
 </script>

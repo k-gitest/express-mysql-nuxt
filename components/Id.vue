@@ -1,30 +1,14 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-      </v-card>
-      
-      <div class="hello">
-        <v-form ref="form" @submit.prevent>
-          <v-text-field type="text" placeholder="name" v-model="name" />
-          <v-text-field type="email" placeholder="email" v-model="email" />
-          <v-col class="text-right">
-          <v-btn color="warning" type="submit" value="" @click="edit">送信</v-btn>
-          </v-col>
-        </v-form>
-      </div>
-      
-      <template v-if="user">
-      {{ user }}
-      </template>
-      
-      <Id :id="id" />
-      
-    </v-col>
-  </v-row>
+  <div class="hello">
+    <v-form ref="form" @submit.prevent>
+      <v-text-field type="text" placeholder="name" v-model="name" />
+      <v-text-field type="email" placeholder="email" v-model="email" />
+      <v-col class="text-right">
+      <v-btn color="warning" type="submit" value="" @click="edit">送信</v-btn>
+      </v-col>
+    </v-form>
+    {{id}}
+  </div>
 </template>
 
 <script>
@@ -43,9 +27,9 @@ export default {
       name: null,
       email: null,
       //users: null,
-      id: null,
     };
   },
+  props: ["id"],
   //watchQuery: ['users'],
   /*
   async asyncData({params}){
@@ -67,7 +51,6 @@ export default {
   */
   
   async created(){
-    
     /*
     //console.log(this.$route.params.id)
     if(this.$route.params.id){
@@ -91,64 +74,20 @@ export default {
     this.email = await this.users.email
 */
   },
-  async fetch({store,params}){
-    //console.log(this.id)
-    //await console.log(params)
-    const items = params.id
-    await store.dispatch('users/getUsersID',{items})
-  },
   //asyncDataやcreatedだとリロードやURL直打ちでapiを呼び出せない
   //回避策としてmountedでapi呼び出す
   async mounted(){
     //編集データ呼び出し
-    await this.findId()
+    //await this.findId()
   },
   
-  computed:{
-    user: async function(){
-     return this.$store.state.users.user
-    }
-    
+  async fetch(){
+    //console.log(context)
+    //await console.log(this.id)
+    //await this.$store.dispatch('users/getUsersID')
   },
   
   methods: {
-    //一覧表示
-    index: async function(){
-      const hoge = await axios.get('/api')
-      .then(res=>{
-        return res.data
-      })
-      .then(data=>{
-        this.users = data
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-    },
-    
-    //新規登録
-    create: async function () {
-      const url = '/api'
-      const params = {
-        name: this.name,
-        email: this.email,
-      }
-      
-      await axios.post(url, params)
-      .then(res=>{
-        //フォーム初期化
-        this.$refs.form.reset()
-        this.text = null
-        this.email = null
-        //dataの初期設定に戻す
-        //Object.assign(this.$data, this.$options.data.call(this))
-        //一覧更新
-        this.index()
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-    },
     
     //編集データ呼び出し
     //更新後に戻る為にmethodsにする
@@ -191,24 +130,6 @@ export default {
       })
       
     },
-    
-    //削除
-    destroy: async function(id){
-      const url = '/api'
-      const params = {
-        id: id
-      }
-      //axiosでdeleteを送る場合は第2引数でオブジェクト渡し
-      await axios.delete(url,{data:params})
-      .then(res => {
-        //一覧更新
-        this.index()
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    },
-
     
   },
   
