@@ -21,7 +21,7 @@
       {{ user }}
       </template>
       
-      <Id :id="id" />
+      <Id :id="user" />
       
     </v-col>
   </v-row>
@@ -105,10 +105,9 @@ export default {
   },
   
   computed:{
-    user: async function(){
+    user: function(){
      return this.$store.state.users.user
     }
-    
   },
   
   methods: {

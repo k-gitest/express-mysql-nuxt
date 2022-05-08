@@ -80,12 +80,13 @@ export default {
     //編集データ呼び出し
     //await this.findId()
   },
-  
+  /*
   async fetch(){
-    //console.log(context)
+    console.log("context")
     //await console.log(this.id)
     //await this.$store.dispatch('users/getUsersID')
   },
+  */
   
   methods: {
     

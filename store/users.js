@@ -45,7 +45,9 @@ export const actions = {
   getUsersID: async function({commit}, {items}){
     console.log(items)
     //const url = process.env.API_URL + '/api/users/' + parseInt(items)
-    const url = process.env.API_URL + '/users/' + items
+    //const url = process.env.API_URL + '/users/' + items
+    const url = `${process.env.API_URL}/api/users/${items}`
+    console.log(url)
     return await axios.get(url)
     .then(res=>{
       commit('getUser', res.data)
