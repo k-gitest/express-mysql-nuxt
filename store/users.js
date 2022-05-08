@@ -46,7 +46,9 @@ export const actions = {
     console.log(items)
     //const url = process.env.API_URL + '/api/users/' + parseInt(items)
     //const url = process.env.API_URL + '/users/' + items
-    const url = `${process.env.API_URL}/api/users/${items}`
+    //API_URLがundefinedなら後者を入れる
+    const dbHost = process.env.API_URL || ''
+    const url = `${dbHost}/api/users/${items}`
     console.log(url)
     return await axios.get(url)
     .then(res=>{

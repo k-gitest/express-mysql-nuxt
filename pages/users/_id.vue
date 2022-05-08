@@ -92,6 +92,7 @@ export default {
 */
   },
   async fetch({store,params}){
+    //console.log(process.env.API_URL)
     //console.log(this.id)
     //await console.log(params)
     const items = params.id

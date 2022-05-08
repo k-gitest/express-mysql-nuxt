@@ -7,7 +7,8 @@
       <v-btn color="warning" type="submit" value="" @click="edit">送信</v-btn>
       </v-col>
     </v-form>
-    {{id}}
+    {{ id.name }}<br>
+    {{ id.email }}
   </div>
 </template>
 
@@ -29,7 +30,12 @@ export default {
       //users: null,
     };
   },
-  props: ["id"],
+  props: {
+    id:{
+      type: Object,
+      default: '',
+    },
+  },
   //watchQuery: ['users'],
   /*
   async asyncData({params}){
@@ -51,6 +57,8 @@ export default {
   */
   
   async created(){
+    //this.name = id.name
+    //this.email = id.email
     /*
     //console.log(this.$route.params.id)
     if(this.$route.params.id){
@@ -79,6 +87,10 @@ export default {
   async mounted(){
     //編集データ呼び出し
     //await this.findId()
+    //const hoge = this.id || null
+    this.name = this.id.name || null
+    this.email = this.id.email || null
+    //console.log(hoge)
   },
   /*
   async fetch(){
