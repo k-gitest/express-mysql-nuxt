@@ -57,8 +57,9 @@ export default {
   */
   
   async created(){
-    //this.name = id.name
-    //this.email = id.email
+    //propsからデータを挿入する
+    this.name = this.id.name || null
+    this.email = this.id.email || null
     /*
     //console.log(this.$route.params.id)
     if(this.$route.params.id){
@@ -88,8 +89,8 @@ export default {
     //編集データ呼び出し
     //await this.findId()
     //const hoge = this.id || null
-    this.name = this.id.name || null
-    this.email = this.id.email || null
+    //this.name = this.id.name || null
+    //this.email = this.id.email || null
     //console.log(hoge)
   },
   /*
