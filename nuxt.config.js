@@ -70,6 +70,7 @@ export default {
   //ユーザー認証のエンドポイント設定
   auth: {
     strategies: {
+      //$auth.loginWithでの引数に対応
       local: {
         endpoints: {
           login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
@@ -91,7 +92,7 @@ export default {
     // proxyを使用する場合baseURLは併用できないためコメントアウト
     baseURL: process.env.API_BASE_URL,
     //baseURL: 'http://localhost:3000/',
-    browserBaseURL: 'http://localhost-travel-2.paiza-user-free.cloud:3000/',
+    browserBaseURL: 'https://localhost-k-paiza-1.paiza-user-free.cloud:3000/',
     // baseURLとproxyを同時に使用することはできないためprefixを設定し、baseURLとして使用する
     //prefix: '/api',
   },

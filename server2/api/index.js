@@ -53,7 +53,11 @@ app.delete('/', async (req, res) => {
   res.send(true)
 })
 
-
+//認証
+app.post('/auth/login', (req, res) => {
+  console.log(req.body)
+  
+})
 
 
 
