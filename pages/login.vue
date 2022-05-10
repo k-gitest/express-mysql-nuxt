@@ -48,6 +48,9 @@
         this.$auth.loginWith('local',{
           data: this.user
         })
+        .then(res=>{
+          console.log(res.data)
+        })
       },
     }
   }

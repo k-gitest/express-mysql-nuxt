@@ -1,6 +1,7 @@
 const express = require('express')
 const { Sequelize, DataTypes } = require('sequelize')
 const app = express()
+const jwt = require('jsonwebtoken')
 
 const models = require('../models/')
 
@@ -54,9 +55,24 @@ app.delete('/', async (req, res) => {
 })
 
 //認証
-app.post('/auth/login', (req, res) => {
+app.post('/auth/login', async (req, res) => {
   console.log(req.body)
-  
+  const rows = await models.User.findAll({
+    where: {email: req.body.email},
+  })
+  console.log(rows[0].name)
+  if(rows[0].name === req.body.name){
+    console.log('login')
+  }
+  //Tokenの発行　書き換え
+  const payload = {
+    id: rows[0].id,
+    name: rows[0].name,
+    email: rows[0].email,
+  }
+  //JWTのTokenを発行するには最低でもpayloadとsecretキー（秘密鍵）が必要
+  const token = jwt.sign(payload, 'secret')
+  return res.json({token})
 })
 
 
