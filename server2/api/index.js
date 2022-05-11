@@ -74,6 +74,24 @@ app.post('/auth/login', async (req, res) => {
   const token = jwt.sign(payload, 'secret')
   return res.json({token})
 })
+//Tokenの確認
+app.get('/auth/user', (req, res) => {
+  const headers = req.headers
+  console.log(headers)
+  const bearToken = req.headers["authorization"]
+  const bearer = bearToken.split(" ")
+  const token = bearer[1]
+  
+  jwt.verify(token, "secret", (error, user) => {
+    if (error) {
+      return res.sendStatus(403);
+    } else {
+      return res.json({
+        user,
+      })
+    }
+  })
+})
 
 
 

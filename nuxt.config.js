@@ -69,6 +69,11 @@ export default {
   
   //ユーザー認証のエンドポイント設定
   auth: {
+    //認証後のリダイレクト先
+    redirect: {
+      home: '/dashboard', //ログイン後
+      logout: '/login', //ログアウト後
+    },
     strategies: {
       //$auth.loginWithでの引数に対応
       local: {
@@ -92,7 +97,7 @@ export default {
     // proxyを使用する場合baseURLは併用できないためコメントアウト
     baseURL: process.env.API_BASE_URL,
     //baseURL: 'http://localhost:3000/',
-    browserBaseURL: 'https://localhost-k-paiza-2.paiza-user-free.cloud:3000/',
+    browserBaseURL: 'https://localhost-travel-3.paiza-user-free.cloud:3000/',
     // baseURLとproxyを同時に使用することはできないためprefixを設定し、baseURLとして使用する
     //prefix: '/api',
   },

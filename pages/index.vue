@@ -8,6 +8,9 @@
       <v-card>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
+          <div>
+            <p>ログイン状態：{{$auth.loggedIn}}</p>
+          </div>
         </v-card-title>
         <v-card-actions>
           <v-spacer />
@@ -20,6 +23,10 @@
             </ul v-for>
           </template v-if>
           -->
+          
+          <v-btn nuxt to="/login" color="pink">
+            Login
+          </v-btn>
           
           <v-btn @click="index" color="pink">
             index
