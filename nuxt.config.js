@@ -97,7 +97,7 @@ export default {
     // proxyを使用する場合baseURLは併用できないためコメントアウト
     baseURL: process.env.API_BASE_URL,
     //baseURL: 'http://localhost:3000/',
-    browserBaseURL: 'https://localhost-travel-3.paiza-user-free.cloud:3000/',
+    browserBaseURL: 'https://localhost-travel-visted-1.paiza-user-free.cloud:3000/',
     // baseURLとproxyを同時に使用することはできないためprefixを設定し、baseURLとして使用する
     //prefix: '/api',
   },

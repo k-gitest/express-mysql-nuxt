@@ -8,7 +8,8 @@
       </v-btn>
     </v-card-actions>
     
-    <template v-if="users">
+    <template v-if="users.length > 0">
+      {{users}}
       <table style="width:100%;">
         <thead>
           <tr>

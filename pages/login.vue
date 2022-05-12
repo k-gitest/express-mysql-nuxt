@@ -1,11 +1,13 @@
 <template>
 <div>
   <div>
-  <h1>ログインユーザ</h1>
+  <h1>ログイン</h1>
   <v-form @submit.prevent>
     <v-text-field type="text" placeholder="name" v-model="user.name" />
     <v-text-field type="email" placeholder="email" v-model="user.email" />
+    <!--
     <v-text-field type="email" placeholder="password" v-model="user.password" />
+    -->
     <v-col class="text-right">
       <v-btn color="warning" type="submit" value="" @click="loginUser">ログイン</v-btn>
     </v-col>
@@ -41,6 +43,7 @@
       }
     },
     methods:{
+      //ログイン認証
       loginUser(){
         //localはnuxt.config.jsのendpointsで追加したstrategiesのlocalに対応
         //送信先はnuxtcofig.jsで設定したloginのurl
