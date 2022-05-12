@@ -15,7 +15,7 @@
 
 export default {
   //ログイン後のアクセス制限
-    middleware: 'auth'
+  middleware: 'auth'
 }
 
 /*
