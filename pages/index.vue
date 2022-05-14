@@ -6,8 +6,8 @@
         <VuetifyLogo />
       </v-card>
       <v-card>
-        <FormParts-TextField text="submitボタン" />
-        <FormParts-SubmitBtn btnTitle="submitボタン" />
+        
+        <LoginForm />
         
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
@@ -85,8 +85,6 @@
       </div>
       
       <User />
-      
-      <FormParts-TextField />
       
     </v-col>
   </v-row>

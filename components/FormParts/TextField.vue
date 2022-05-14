@@ -1,18 +1,20 @@
 <template>
-    <v-text-field type="text" placeholder="name" v-model="text" />
+  <input 
+      class="form-input" 
+      :value="value" 
+      @input="$emit('input', $event.target.value)"
+    >
 </template>
 
 <script>
   export default {
-    data(){
-      return {
-        text: null,
-      }
-    },
-    
-    props: {
-      text:null,
-    }
+    props: ['value'],
     
   }
 </script>
+<style>
+  .form-input{
+    background: #fff;
+    border: solid 1px #ccc;
+  }
+</style>
