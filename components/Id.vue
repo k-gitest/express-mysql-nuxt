@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <v-form ref="form" @submit.prevent>
+      <p>Idコンポーネント</p>
       <v-text-field type="text" placeholder="name" v-model="name" />
       <v-text-field type="email" placeholder="email" v-model="email" />
       <v-col class="text-right">

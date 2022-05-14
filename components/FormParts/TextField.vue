@@ -1,5 +1,6 @@
 <template>
   <v-form @submit.prevent>
+    <p>TextFieldコンポーネント</p>
     <v-text-field type="text" placeholder="name" v-model="name" />
     <v-text-field type="email" placeholder="email" v-model="email" />
     <!--

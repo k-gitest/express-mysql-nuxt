@@ -1,6 +1,7 @@
 <template>
 
   <v-card>
+    <p>Userコンポーネント</p>
     <v-card-actions>
       <v-spacer />
       <v-btn @click="index" color="pink">
