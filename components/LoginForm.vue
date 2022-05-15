@@ -1,12 +1,14 @@
 <template>
   <v-form @submit.prevent>
-    <FormParts-TextField v-model="message" />
+    <FormParts-TextField placeholder="name" v-model="message" />
     <FormParts-SubmitBtn @parent-event="submit" btnTitle="submitボタン" />
   </v-form>
 </template>
 <script>
 // 基本的に親→子→親の順でデータを渡す
 // v-model以外に:value="message" @input="message = $event"でも可能
+// v-modelが使えるのはinputやtextareaなどに限られる
+// .syncでもv-modelと同じ事ができる
   export default{
     data() {
       return {
