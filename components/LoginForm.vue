@@ -5,13 +5,15 @@
   </v-form>
 </template>
 <script>
+// 基本的に親→子→親の順でデータを渡す
+// v-model以外に:value="message" @input="message = $event"でも可能
   export default{
     data() {
       return {
         message: null,
       };
     },
-    
+    // 子から受け取ったイベントでメソッドを起動
     methods: {
       submit: function(){
         console.log(this.message)

@@ -7,11 +7,15 @@
 </template>
 
 <script>
+// propsで親からデータを受け取りvalueにセット、$emitで親にデータを返す
+// $emitの引数はイベント名と値
+// $eventで要素にアクセスする
   export default {
     props: ['value'],
     
   }
 </script>
+
 <style>
   .form-input{
     background: #fff;
