@@ -1,7 +1,8 @@
 <template>
   <v-form @submit.prevent>
-    <FormParts-TextField class="hoge"placeholder="name" v-model="name" />
-    <FormParts-TextField placeholder="email" v-model="email" />
+    <FormParts-TextField placeholder="name" v-model="form.name" /><br>
+    <FormParts-TextField placeholder="email" v-model="form.email" /><br>
+    <FormParts-TextField placeholder="password" v-model="form.password" />
     <FormParts-SubmitBtn @parent-event="submit" btnTitle="submitボタン" />
   </v-form>
 </template>
@@ -13,15 +14,17 @@
   export default{
     data() {
       return {
-        name: null,
-        email: null,
-        
+        form: {
+          name: null,
+          email: null,
+          password: null,
+        }
       };
     },
     // 子から受け取ったイベントでメソッドを起動
     methods: {
       submit: function(){
-        console.log(this.name,this.email)
+        console.log(this.form)
       }
     },
   
@@ -33,5 +36,5 @@
 </script>
 
 <style>
-  .hoge{width:100%;}
+
 </style>

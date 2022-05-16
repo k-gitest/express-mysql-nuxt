@@ -4,7 +4,10 @@
 <script>
   export default {
     props: {
-      btnTitle: null,
+      btnTitle: {
+        type: String,
+        default: "ボタン",
+      },
     },
     // 子から親へイベントを$emitで渡す（引数も渡せる）
     methods: {
