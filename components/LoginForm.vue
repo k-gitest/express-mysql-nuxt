@@ -10,7 +10,7 @@
 // 基本的に親→子→親の順でデータを渡す
 // v-model以外に:value="message" @input="message = $event"でも可能
 // v-modelが使えるのはinputやtextareaなどに限られる
-// .syncでもv-modelと同じ事ができる
+// .syncでもv-modelと同じ事ができる vue3で削除
   export default{
     data() {
       return {
