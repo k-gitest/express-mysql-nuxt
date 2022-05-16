@@ -3,6 +3,7 @@
     <FormParts-TextField placeholder="name" v-model="form.name" /><br>
     <FormParts-TextField placeholder="email" v-model="form.email" /><br>
     <FormParts-TextField placeholder="password" v-model="form.password" />
+    <FormParts-SelectBox :options="form.sex.select" v-model="form.sex.selected" />
     <FormParts-SubmitBtn @parent-event="submit" btnTitle="submitボタン" />
   </v-form>
 </template>
@@ -18,6 +19,10 @@
           name: null,
           email: null,
           password: null,
+          sex: {
+            select:['男', '女', 'その他'],
+            selected:'男'
+          }
         }
       };
     },

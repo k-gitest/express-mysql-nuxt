@@ -40,7 +40,7 @@
     
     methods: {
       onInput: function(value){
-        emit('input', value)
+        this.$emit('input', value)
       }
     }
     
