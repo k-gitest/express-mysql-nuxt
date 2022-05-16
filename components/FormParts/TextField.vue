@@ -13,6 +13,7 @@
 // $eventで要素にアクセスする
 // v-bind="$attrs"で親の属性を継承できる（src、placeholderなど）
   export default {
+    inheritAttrs: false,
     props: ['value'],
     
     //受け取り方は複数ある
@@ -26,13 +27,13 @@
     }
     */
     //mountedなどでも親へデータを渡せる
-    /*
+    
     mounted() {
-      this.$emit('childe-data', this.user)
+      //this.$emit('childe-data', this.user)
       //$attrsの中身を見れる
       console.log(this.$attrs)
     }
-    */
+    
     
   }
 </script>
