@@ -30,7 +30,7 @@
       }
     }
     */
-    //mountedなどでも親へデータを渡せる
+    //mountedやmethodsなどでも親へデータを渡せる
     
     mounted() {
       //this.$emit('childe-data', this.user)
