@@ -3,7 +3,8 @@
     <FormParts-TextField placeholder="name" v-model="form.name" /><br>
     <FormParts-TextField placeholder="email" v-model="form.email" /><br>
     <FormParts-TextField placeholder="password" v-model="form.password" />
-    <FormParts-SelectBox :options="form.sex.select" v-model="form.sex.selected" />
+    <FormParts-SelectBox :options="form.address.select" v-model="form.address.selected" />
+    <FormParts-RadioBtn name="sex_radio" :options="form.sex.checks" v-model="form.sex.checked" />
     <FormParts-SubmitBtn @parent-event="submit" btnTitle="submitボタン" />
   </v-form>
 </template>
@@ -19,10 +20,18 @@
           name: null,
           email: null,
           password: null,
+          address: {
+            select:['東京', '千葉', '神奈川'],
+            selected:'東京',
+          },
           sex: {
-            select:['男', '女', 'その他'],
-            selected:'男'
-          }
+            checks:[
+              {label:'男', value:'男'},
+              {label:'女', value:'女'},
+              {label:'その他', value:'その他'}
+              ],
+            checked:'男',
+          },
         }
       };
     },

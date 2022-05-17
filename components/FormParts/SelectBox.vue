@@ -34,7 +34,8 @@
     
     methods: {
       onChange: function(value){
-        this.$emit('change', value)
+        //console.log(value)
+        this.$emit('input', value)
       }
     }
     
