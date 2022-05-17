@@ -3,8 +3,9 @@
     <FormParts-TextField placeholder="name" v-model="form.name" /><br>
     <FormParts-TextField placeholder="email" v-model="form.email" /><br>
     <FormParts-TextField placeholder="password" v-model="form.password" />
-    <FormParts-SelectBox :options="form.address.select" v-model="form.address.selected" />
+    <FormParts-SelectBox :options="form.address.selects" v-model="form.address.selected" />
     <FormParts-RadioBtn name="sex_radio" :options="form.sex.checks" v-model="form.sex.checked" />
+    <FormParts-CheckBox name="salary_check" :options="form.salary.checks" v-model="form.salary.checked" />
     <FormParts-SubmitBtn @parent-event="submit" btnTitle="submitボタン" />
   </v-form>
 </template>
@@ -21,7 +22,7 @@
           email: null,
           password: null,
           address: {
-            select:['東京', '千葉', '神奈川'],
+            selects:['東京', '千葉', '神奈川'],
             selected:'東京',
           },
           sex: {
@@ -32,6 +33,14 @@
               ],
             checked:'男',
           },
+          salary: {
+            checks:[
+              {label:'月給', value:'月給'},
+              {label:'年俸', value:'年俸'},
+              {label:'その他', value:'その他'}
+              ],
+            checked:'月給',
+          }
         }
       };
     },

@@ -1,18 +1,17 @@
 <template>
-  <select
-    class="form-input"
-    :value="value"
-    @change="onChange($event.target.value)"
-    v-bind="$attrs"
-  >
-    <option
-      v-for="(option, index) in options"
-      :key="index"
-      :selected="option === value"
-    >
-      {{ option }}
-    </option>
-  </select>
+  <div>
+    <div v-for="(option, index) in options" :key="index">
+      <input 
+        type="checkbox" 
+        :id="index"
+        :name="name"
+        :value="option.value" 
+        :checked="option.value === value"
+        @change="onChange($event.target.value)"
+      />
+      {{ option.label }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -20,11 +19,14 @@
     inheritAttrs: false,
     props: {
       options:{
-        type: Array,
+       type: Array,
+       //require: true,
       },
       value:{
-       type: String,
-       //require: true,
+        type: String,
+      },
+      name:{
+        type: String,
       }
     },
     
