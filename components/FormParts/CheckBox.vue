@@ -6,8 +6,8 @@
         :id="index"
         :name="name"
         :value="option.value" 
-        :checked="option.value === value"
-        @change="onChange($event.target.value)"
+        :checked="option.value === value[0]"
+        @change="onChange"
       />
       {{ option.label }}
     </div>
@@ -23,21 +23,34 @@
        //require: true,
       },
       value:{
-        type: String,
+        type: Array,
       },
       name:{
         type: String,
       }
     },
     
+    data(){
+      return{
+        values:[]
+      }
+    },
+    
     mounted() {
       console.log(this.$attrs)
+      this.values.push(this.value[0])
     },
     
     methods: {
-      onChange: function(value){
-        //console.log(value)
-        this.$emit('input', value)
+      onChange: function(e){
+        if (e.target.checked) {
+          console.log(e.target.checked)
+          this.values.push(e.target.value)
+          //this.values.push(e.target.value)
+        } else {
+          this.values = this.values.filter(v => v !== e.target.value)
+        }
+        this.$emit('input', this.values)
       }
     }
     

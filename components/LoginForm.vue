@@ -39,7 +39,7 @@
               {label:'年俸', value:'年俸'},
               {label:'その他', value:'その他'}
               ],
-            checked:'月給',
+            checked:['月給'],
           }
         }
       };
