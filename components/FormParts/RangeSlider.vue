@@ -1,8 +1,11 @@
 <template>
   <input 
+      type="range"
       class="form-input" 
+      :min="min"
+      :max="max"
       :value="value" 
-      @input="onInput($event.target.value)"
+      @change="onChange"
       v-bind="$attrs"
     >
 </template>
@@ -18,6 +21,12 @@
       value:{
        type: String,
        //require: true,
+      },
+      min:{
+        type: Number,
+      },
+      max:{
+        type: Number,
       }
     },
     //受け取り方は複数ある
@@ -39,9 +48,10 @@
     },
     
     methods: {
-      onInput: function(value){
+      onChange: function(e){
+        console.log(e.target.value)
         // v-modelを使用する場合はinput指定
-        this.$emit('input', value)
+        this.$emit('input', e.target.value)
       }
     }
     

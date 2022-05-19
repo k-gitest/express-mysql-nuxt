@@ -9,6 +9,7 @@
     <FormParts-TextareaField :rows="10" :cols="50" placeholder="コメント" v-model="form.comment" />
     <FormParts-DatePicker name="date_start" v-model="form.date" />
     <FormParts-FileUpload name="file" v-model="form.file" btnTitle="選択ボタン" />
+     <FormParts-RangeSlider name="slider" :min="0" :max="100" v-model="form.level" />
     <FormParts-SubmitBtn @parent-event="submit" btnTitle="submitボタン" />
   </v-form>
 </template>
@@ -47,6 +48,7 @@
           comment: null,
           date: '2018-07-22',
           file: null,
+          level: '50',
         }
       };
     },
