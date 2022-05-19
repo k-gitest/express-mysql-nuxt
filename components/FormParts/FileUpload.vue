@@ -2,10 +2,9 @@
   <input 
       class="form-input" 
       type="file"
-      @click="onClick"
+      @change="onChange"
       v-bind="$attrs"
-    >
-    </input>
+    />
 </template>
 
 <script>
@@ -16,10 +15,12 @@
   export default {
     inheritAttrs: false,
     props: {
+      /*
       value:{
-       type: String,
+       type: Object,
        //require: true,
       },
+      */
       btnTitle: {
         type: String,
       }
@@ -43,9 +44,11 @@
     },
     
     methods: {
-      onClick: function(e){
+      onChange: function(e){
+        console.log(e.target.value)
+        console.log(typeof e.target.files[0])
         // v-modelを使用する場合はinput指定
-        this.$emit('input', e.target.value)
+        this.$emit('input', e.target.files[0])
       }
     }
     
@@ -59,5 +62,6 @@
     width:100%;
     margin:0 0 1rem 0;
     padding: 0.2rem;
+    color:#000;
   }
 </style>
