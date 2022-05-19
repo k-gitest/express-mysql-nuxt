@@ -1,10 +1,11 @@
 <template>
   <input 
       class="form-input" 
-      :value="value" 
-      @input="onInput($event.target.value)"
+      type="file"
+      @click="onClick"
       v-bind="$attrs"
     >
+    </input>
 </template>
 
 <script>
@@ -18,6 +19,9 @@
       value:{
        type: String,
        //require: true,
+      },
+      btnTitle: {
+        type: String,
       }
     },
     //受け取り方は複数ある
@@ -39,9 +43,9 @@
     },
     
     methods: {
-      onInput: function(value){
+      onClick: function(e){
         // v-modelを使用する場合はinput指定
-        this.$emit('input', value)
+        this.$emit('input', e.target.value)
       }
     }
     

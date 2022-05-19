@@ -1,15 +1,13 @@
 <template>
   <div>
-    <div v-for="(option, index) in options" :key="index">
       <input 
-        type="radio" 
+        class="form-input"
+        type="date" 
         :name="name"
-        :value="option.value" 
-        :checked="option.value === value"
-        @change="onChange($event.target.value)"
+        :value="value" 
+        @change="onChange"
+        v-bind="$attrs"
       />
-      {{ option.label }}
-    </div>
   </div>
 </template>
 
@@ -17,10 +15,6 @@
   export default {
     inheritAttrs: false,
     props: {
-      options:{
-       type: Array,
-       //require: true,
-      },
       value:{
         type: String,
       },
@@ -34,9 +28,9 @@
     },
     
     methods: {
-      onChange: function(value){
+      onChange: function(e){
         //console.log(value)
-        this.$emit('input', value)
+        this.$emit('input', e.target.value)
       }
     }
     

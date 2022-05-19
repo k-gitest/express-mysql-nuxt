@@ -7,6 +7,8 @@
     <FormParts-RadioBtn name="sex_radio" :options="form.sex.checks" v-model="form.sex.checked" />
     <FormParts-CheckBox name="salary_check" :options="form.salary.checks" v-model="form.salary.checked" />
     <FormParts-TextareaField :rows="10" :cols="50" placeholder="コメント" v-model="form.comment" />
+    <FormParts-DatePicker name="date_start" v-model="form.date" />
+    <FormParts-FileUpload name="file" v-model="form.file" btnTitle="選択ボタン" />
     <FormParts-SubmitBtn @parent-event="submit" btnTitle="submitボタン" />
   </v-form>
 </template>
@@ -43,6 +45,8 @@
             checked:['月給'],
           },
           comment: null,
+          date: '2018-07-22',
+          file: null,
         }
       };
     },
