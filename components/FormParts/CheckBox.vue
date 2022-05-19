@@ -1,15 +1,17 @@
 <template>
   <div>
     <div v-for="(option, index) in options" :key="index">
-      <input 
-        type="checkbox" 
-        :id="index"
-        :name="name"
-        :value="option.value" 
-        :checked="option.value === value[0]"
-        @change="onChange"
-      />
-      {{ option.label }}
+      <label>
+        <input 
+          type="checkbox" 
+          :id="index"
+          :name="name"
+          :value="option.value" 
+          :checked="option.value === value[0]"
+          @change="onChange"
+        />
+        {{ option.label }}
+      </label>
     </div>
   </div>
 </template>

@@ -1,14 +1,16 @@
 <template>
   <div>
     <div v-for="(option, index) in options" :key="index">
-      <input 
-        type="radio" 
-        :name="name"
-        :value="option.value" 
-        :checked="option.value === value"
-        @change="onChange($event.target.value)"
-      />
-      {{ option.label }}
+      <label>
+        <input 
+          type="radio" 
+          :name="name"
+          :value="option.value" 
+          :checked="option.value === value"
+          @change="onChange($event.target.value)"
+        />
+        {{ option.label }}
+      </label>
     </div>
   </div>
 </template>
