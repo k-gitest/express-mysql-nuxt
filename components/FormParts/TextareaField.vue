@@ -1,12 +1,12 @@
 <template>
-  <input 
+  <textarea 
       class="form-input" 
       :rows="rows"
       :cols="cols"
       :value="value" 
       @input="onInput"
       v-bind="$attrs"
-    >
+    ></textarea>
 </template>
 
 <script>
