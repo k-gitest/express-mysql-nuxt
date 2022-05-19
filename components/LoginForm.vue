@@ -6,6 +6,7 @@
     <FormParts-SelectBox :options="form.address.selects" v-model="form.address.selected" />
     <FormParts-RadioBtn name="sex_radio" :options="form.sex.checks" v-model="form.sex.checked" />
     <FormParts-CheckBox name="salary_check" :options="form.salary.checks" v-model="form.salary.checked" />
+    <FormParts-TextareaField :rows="10" :cols="50" placeholder="コメント" v-model="form.comment" />
     <FormParts-SubmitBtn @parent-event="submit" btnTitle="submitボタン" />
   </v-form>
 </template>
@@ -40,7 +41,8 @@
               {label:'その他', value:'その他'}
               ],
             checked:['月給'],
-          }
+          },
+          comment: null,
         }
       };
     },

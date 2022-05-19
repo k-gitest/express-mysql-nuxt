@@ -1,8 +1,10 @@
 <template>
   <input 
       class="form-input" 
+      :rows="rows"
+      :cols="cols"
       :value="value" 
-      @input="onInput($event.target.value)"
+      @input="onInput"
       v-bind="$attrs"
     >
 </template>
@@ -18,6 +20,12 @@
       value:{
        type: String,
        //require: true,
+      },
+      rows:{
+        type: Number,
+      },
+      cols:{
+        type: Number,
       }
     },
     //受け取り方は複数ある
@@ -39,9 +47,9 @@
     },
     
     methods: {
-      onInput: function(value){
+      onInput: function(e){
         // v-modelを使用する場合はinput指定
-        this.$emit('input', value)
+        this.$emit('input', e.target.value)
       }
     }
     
