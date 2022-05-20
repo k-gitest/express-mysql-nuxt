@@ -7,6 +7,8 @@
       </v-card>
       <v-card>
         
+        <DataTable />
+        
         <LoginForm />
         
         <v-card-title class="headline">
@@ -103,6 +105,7 @@ export default {
   },
   
   /*
+  //asyncDataはpages配下で使用できる
   //store.dispatchなどはpages配下で使用できる
   //componentes配下では使用できない
   async fetch({store}){
