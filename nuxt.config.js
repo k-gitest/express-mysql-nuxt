@@ -39,7 +39,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios',  
+    '@nuxtjs/axios',
     '@nuxtjs/auth'
   ],
 
@@ -66,7 +66,7 @@ export default {
   build: {
     loadingScreen: false,
   },
-  
+
   //ユーザー認証のエンドポイント設定
   auth: {
     //認証後のリダイレクト先
@@ -87,7 +87,7 @@ export default {
       }
     }
   },
-  
+
   //リクエスト送信用のサーバーURL
   axios: {
     //Originとはプロトコル、ホスト、ポート番号のセット 例）httpがプロトコル、localhostがホスト、3000がポート
@@ -97,14 +97,14 @@ export default {
     // proxyを使用する場合baseURLは併用できないためコメントアウト
     baseURL: process.env.API_BASE_URL,
     //baseURL: 'http://localhost:3000/',
-    browserBaseURL: 'https://localhost-travel-visted-1.paiza-user-free.cloud:3000/',
+    browserBaseURL: 'https://localhost-cloud:3000/',
     // baseURLとproxyを同時に使用することはできないためprefixを設定し、baseURLとして使用する
     //prefix: '/api',
   },
-  
+
   //api用のサーバーミドルウェア設定
   serverMiddleware: [
     { path: '/api', handler: '~/server2/api' },
   ]
-  
+
 }

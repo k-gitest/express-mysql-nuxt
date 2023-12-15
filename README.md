@@ -1,69 +1,64 @@
-# myapp
+## 目的
+nuxt.jsとexpressを使用してCMSを構築する技術選定における検証である。
 
-## Build Setup
+## app概要
+フロントはcreate-nuxt-appで構築されたNuxt.jsを使用し、バックエンドにexpressを利用したCMSプロジェクトです。
 
-```bash
-# install dependencies
-$ npm install
+* DBはmysql、ORマッパーにはsequelizeを使用しnuxtとexpressの動作を検証する。
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## 開発環境
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+* nuxt 2.15.8
+* express 4.17.3
+* sequelize 6.19.0
+* mysql2 2.3.3
+* vuetify 2.6.1
 
-# generate static project
-$ npm run generate
-```
+## ディレクトリ構成
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+<pre>
+myapp...プロジェクトルート
+  ├── assets ...css設定
+  ├── components ...呼び出し用コンポーネントファイル
+  │     ├── FormParts ...フォーム用コンポーネント
+  │     ├── Private ...ログインユーザー向けコンポーネント
+  │     ├── Layout ...メインレイアウト
+  │     └── provider ...ユーザー認証チェック
+  ├── layouts ...レイアウト設定
+  ├── pages ...nuxtドキュメントルート
+  │     ├── api ...サーバー側処理
+  │     ├── login ...ログイン画面
+  │     ├── signup ...登録画面
+  │     └── user ...会員向け画面
+  │           └── profile ...会員情報画面
+  ├── server ...express／sequelizeテスト／ejs用api
+  ├── server2 ...express設定／sequeize設定/nuxt用api
+  │     ├── api ...nuxt用api設定／JWT検証
+  │     ├── bin ...express用webサーバー設定
+  │     ├── config ...DBパス設定
+  │     ├── migrations ...sequeize用DBマイグレ設定
+  │     ├── models ...sequeize用DBモデル設定
+  │     ├── seeders ...sequeize用DBテストシーダー設定
+  │     └── app.js ...express設定
+  ├── static ...画像ファイル
+  └── store ...Vuex設定
+</pre>
 
-## Special Directories
+* 今回serverはexpressとsequelizeの動作テストのみ使用しておりnuxtとは連動していない。
+* nuxtからのCRUD処理やJWTトークン検証はserver2/apiで行う
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+## 注意点
 
-### `assets`
+nuxtとexpressの連携はnuxt.configで行う為、まずnuxtをインストールしてからexpressをインストールした方が良い。package.jsonはそちらを使用する。
+ミドルウェア設定でパスアドレスを設定し、バックエンドとの接続はaxiosを使用している。
+nuxt.configでは他にauth認証の設定も行っており、認証後の遷移などもここで指定する。
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+## 結論
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+expressをバックエンドとした場合、railsやlaravelと比較してnuxtと同じjsであるため今回は必要最低限の構成であるが、比較的実装は簡単だと思われる。rubyやphpを覚える必要はない。ただ少々原始的な書き方ではある。
 
-### `components`
+nextと異なりフロントとバックエンドのディレクトリが分離できるので作業もしやすいと思われる。接続も殆どnuxt.configで設定するので問題が起こりにくいと考えられる。
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+expressを更に速度特化にしたfastifyも技術選定として加える事ができると思われる。
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+nuxtに関してはver3でnitro(h3)を標準搭載しており、expressを使用する場面が少ない可能性があるが、接続方法もnuxt.configから設定できるため好みの問題といえる。
