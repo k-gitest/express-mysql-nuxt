@@ -62,3 +62,5 @@ nextと異なりフロントとバックエンドのディレクトリが分離�
 expressを更に速度特化にしたfastifyも技術選定として加える事ができると思われる。
 
 nuxtに関してはver3でnitro(h3)を標準搭載しており、expressを使用する場面が少ない可能性があるが、接続方法もnuxt.configから設定できるため好みの問題といえる。
+
+[nuxt3の検証はコチラ](https://github.com/k-gitest/nuxt3-form-components)
